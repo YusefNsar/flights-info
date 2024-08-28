@@ -17,7 +17,8 @@
     "lint": "eslint --cache --report-unused-disable-directives .",
     "test": "vitest",
     "build": "yarn workspaces foreach -tiA run build",
-    "deploy": "yarn workspace edge deploy"
+    "deploy": "yarn workspace edge deploy",
+    "server": "flights-server --verbose --async --noreadme"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
@@ -55,5 +56,11 @@
     "bracketSameLine": false,
     "arrowParens": "always",
     "endOfLine": "lf"
+  },
+  "dependencies": {
+    "@musalasoft/flights-server": "^1.0.12",
+    "@tanstack/react-query": "^5.52.2",
+    "@tanstack/react-table": "^8.20.5",
+    "axios": "^1.7.5"
   }
 }

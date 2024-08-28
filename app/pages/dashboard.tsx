@@ -2,6 +2,7 @@
 /* SPDX-License-Identifier: MIT */
 
 import { Box, Card, CardContent, Container, Typography } from "@mui/joy";
+import { FlightsTable } from "../components/FlightsTable";
 import { usePageEffect } from "../core/page";
 
 export const Component = function Dashboard(): JSX.Element {
@@ -10,7 +11,7 @@ export const Component = function Dashboard(): JSX.Element {
   return (
     <Container sx={{ py: 2 }}>
       <Typography sx={{ mb: 2 }} level="h2">
-        Dashboard
+        Flights Info
       </Typography>
 
       <Box
@@ -24,6 +25,7 @@ export const Component = function Dashboard(): JSX.Element {
           <CardContent sx={{ minHeight: 300 }}>
             <Typography level="h3">Card title</Typography>
             <Typography>Card content</Typography>
+            <FlightsTable />
           </CardContent>
         </Card>
 
