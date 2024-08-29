@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from "axios";
 
-const BASE_URL = "http://localhost:3000"; // Replace with your API base URL
+export const BASE_URL = "http://localhost:3000"; // Replace with your API base URL
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -105,7 +105,9 @@ export const createFlight = async (
 };
 
 export const createFlightWithPhoto = async (
-  flightData: Partial<Flight>,
+  flightData: Pick<Flight, "code" | "capacity" | "departureDate"> & {
+    photo?: File;
+  },
 ): Promise<CreateFlightResponse> => {
   try {
     const formData = new FormData();
@@ -154,7 +156,7 @@ export const updateFlight = async (
 
 export const updateFlightWithPhoto = async (
   id: string,
-  flightData: Partial<Flight>,
+  flightData: Omit<Partial<Flight>, "photo"> & { photo?: File },
 ): Promise<UpdateFlightResponse> => {
   try {
     const formData = new FormData();
@@ -257,6 +259,7 @@ export interface Flight {
   departureDate: string;
   status: string;
   img?: string;
+  photo?: string;
 }
 
 interface ListResourcesResponse<Resource> {

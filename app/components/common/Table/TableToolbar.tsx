@@ -51,9 +51,9 @@ export function TableToolbar<RowData>(props: TableToolbarProps<RowData>) {
       {searchRows}
 
       <Stack direction="row-reverse" spacing={1} minWidth={72} sx={{ ml: 2 }}>
-        {numSelected === 1 && editRow(selected[0].original)}
-
         {numSelected > 0 ? deleteRows(selected.map((s) => s.original)) : addRow}
+
+        {numSelected === 1 && editRow(selected[0].original)}
       </Stack>
     </Box>
   );

@@ -1,5 +1,5 @@
 import { useEditFlights } from "../../../hooks/flights/useEditFlights";
-import { Flight } from "../../../services/flightsApi";
+import { BASE_URL, Flight } from "../../../services/flightsApi";
 import { FlightForm } from "../FlightsForm";
 
 export interface EditFlightFormProps {
@@ -9,6 +9,10 @@ export interface EditFlightFormProps {
 
 export const EditFlightForm = (props: EditFlightFormProps) => {
   const editFlight = useEditFlights(props.flight, props.onSuccess);
+
+  if (props.flight.img) {
+    props.flight.photo = `${BASE_URL}/flights/${props.flight.id}/photo`;
+  }
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

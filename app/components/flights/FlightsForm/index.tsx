@@ -25,6 +25,7 @@ const getFormFields: (
     defaultValue: defaultValues?.code || "",
     title: "Code",
     type: "text",
+    disabled: !!defaultValues,
     validators: {
       onChange: ({ value }) =>
         !value
@@ -47,7 +48,6 @@ const getFormFields: (
             : undefined;
       },
     },
-    disabled: !!defaultValues,
   },
   capacity: {
     defaultValue: defaultValues?.capacity || 50,
@@ -74,5 +74,11 @@ const getFormFields: (
             ? "Departure Date must be in the future"
             : undefined,
     },
+  },
+  photo: {
+    defaultValue: defaultValues?.photo || "",
+    title: "Photo",
+    type: "file",
+    validators: {},
   },
 });

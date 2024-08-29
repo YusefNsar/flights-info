@@ -3,7 +3,7 @@
 import { Button, Stack } from "@mui/joy";
 import { FieldValidators, useForm } from "@tanstack/react-form";
 import { HTMLInputTypeAttribute } from "react";
-import { FieldField } from "./FormField";
+import { FormField } from "./FormField";
 
 export interface FormProps {
   fields: FormFields;
@@ -51,7 +51,7 @@ export const Form = (props: FormProps) => {
             name={fk}
             validators={fields[fk].validators}
             children={(field) => (
-              <FieldField
+              <FormField
                 field={field}
                 fieldTitle={fields[fk].title}
                 type={fields[fk].type}
