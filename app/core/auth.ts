@@ -3,42 +3,43 @@
 
 import {
   GoogleAuthProvider,
-  User,
   UserCredential,
   getAuth,
   signInAnonymously,
   signInWithPopup,
 } from "firebase/auth";
 import { atom, useAtomValue } from "jotai";
-import { loadable } from "jotai/utils";
+import { atomWithStorage, loadable } from "jotai/utils";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { app, auth } from "./firebase";
-import { store } from "./store";
+import { User } from "../services/flightsApi";
+import { app } from "./firebase";
 
-export const currentUser = atom<Promise<User | null> | User | null>(
-  new Promise<User | null>(() => {}),
-);
+export const currentUserAtom = atom<User | null>(null);
 
-currentUser.debugLabel = "currentUser";
-
-const unsubscribe = auth.onAuthStateChanged((user) => {
-  store.set(currentUser, user);
-});
-
-if (import.meta.hot) {
-  import.meta.hot.dispose(() => unsubscribe());
-}
+currentUserAtom.debugLabel = "currentUser";
 
 export function useCurrentUser() {
-  return useAtomValue(currentUser);
+  return useAtomValue(currentUserAtom);
 }
 
-export const currentUserLoadable = loadable(currentUser);
+export const currentUserLoadable = loadable(currentUserAtom);
 
 export function useCurrentUserLoadable() {
   return useAtomValue(currentUserLoadable);
 }
+
+export const tokenAtom = atomWithStorage<string | null>(
+  "token",
+  null,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  localStorage as any,
+  { getOnInit: true },
+);
+export const refreshTokenAtom = atomWithStorage<string | null>(
+  "refreshToken",
+  null,
+);
 
 export function useSignIn(
   signInMethod: SignInMethod,

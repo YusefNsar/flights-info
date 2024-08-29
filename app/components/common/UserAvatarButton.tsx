@@ -1,7 +1,7 @@
 /* SPDX-FileCopyrightText: 2014-present Kriasoft */
 /* SPDX-License-Identifier: MIT */
 
-import { LogoutRounded, SettingsRounded } from "@mui/icons-material";
+import { LogoutRounded } from "@mui/icons-material";
 import {
   Avatar,
   Dropdown,
@@ -13,12 +13,13 @@ import {
   MenuButton,
   MenuItem,
 } from "@mui/joy";
-import { getAuth, signOut } from "firebase/auth";
-import { useCurrentUser } from "../core/auth";
+import { useCurrentUser } from "../../core/auth";
+import { useLogout } from "../../hooks/auth/useLogout";
 
 export function UserAvatarButton(props: UserAvatarButtonProps): JSX.Element {
   const { sx, ...other } = props;
   const user = useCurrentUser()!;
+  const logout = useLogout();
 
   return (
     <Dropdown>
@@ -31,19 +32,11 @@ export function UserAvatarButton(props: UserAvatarButtonProps): JSX.Element {
           },
         }}
       >
-        <Avatar sx={{ width: 36, height: 36 }} src={user.photoURL ?? undefined}>
-          {user.displayName}
-        </Avatar>
+        <Avatar sx={{ width: 36, height: 36 }} alt={user.name} />
       </MenuButton>
 
       <Menu size="sm">
-        <MenuItem>
-          <ListItemDecorator sx={{ ml: 0.5 }}>
-            <SettingsRounded />
-          </ListItemDecorator>
-          <ListItemContent sx={{ mr: 2 }}>Settings</ListItemContent>
-        </MenuItem>
-        <MenuItem onClick={() => signOut(getAuth())}>
+        <MenuItem onClick={logout}>
           <ListItemDecorator sx={{ ml: 0.5 }}>
             <LogoutRounded />
           </ListItemDecorator>

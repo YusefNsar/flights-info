@@ -8,26 +8,29 @@ import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useLogin } from "../hooks/auth/useLogin";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
-  persistent: HTMLInputElement;
 }
 interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
 export const Login = () => {
+  const [loginUser, isLoading] = useLogin();
+
   const handleSubmit = (event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
+
     const formElements = event.currentTarget.elements;
     const data = {
       email: formElements.email.value,
       password: formElements.password.value,
-      persistent: formElements.persistent.checked,
     };
-    alert(JSON.stringify(data, null, 2));
+
+    loginUser([data.email, data.password]);
   };
 
   return (
@@ -66,7 +69,7 @@ export const Login = () => {
           </FormControl>
 
           <Stack sx={{ gap: 4, mt: 4 }}>
-            <Button type="submit" fullWidth>
+            <Button type="submit" fullWidth loading={isLoading}>
               Sign in
             </Button>
           </Stack>

@@ -1,12 +1,12 @@
 /* SPDX-FileCopyrightText: 2014-present Kriasoft */
 /* SPDX-License-Identifier: MIT */
 
-import { ExpandMoreRounded, NotificationsRounded } from "@mui/icons-material";
-import { Box, BoxProps, Button, IconButton } from "@mui/joy";
+import { ExpandMoreRounded } from "@mui/icons-material";
+import { Box, BoxProps, Button } from "@mui/joy";
 import { Fragment, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { UserAvatarButton } from "../../components/button-user-avatar";
 import { ColorSchemeToggle } from "../../components/common/ColorSchemeToggle";
+import { UserAvatarButton } from "../../components/common/UserAvatarButton";
 import { useCurrentUser } from "../../core/auth";
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
@@ -47,12 +47,7 @@ function ActionButtons(): JSX.Element {
 
   return (
     <Fragment>
-      {/* <ColorSchemeButton variant="soft" size="sm" /> */}
       <ColorSchemeToggle />
-
-      <IconButton variant="soft" size="sm">
-        <NotificationsRounded />
-      </IconButton>
 
       {user ? (
         <UserAvatarButton variant="soft" />

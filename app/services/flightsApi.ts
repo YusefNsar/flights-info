@@ -235,7 +235,10 @@ export const getFlightPhotoURl = (flight: Flight): string =>
   `${BASE_URL}/flights/${flight.id}/photo?skipcache=${Math.random()}`;
 
 interface LoginResponse {
-  accessToken: string;
+  id: string;
+  name: string;
+  email: string;
+  token: string;
   refreshToken: string;
 }
 
@@ -243,13 +246,16 @@ interface RegisterResponse {
   id: string;
   name: string;
   email: string;
+  token: string;
+  refreshToken: string;
 }
 
 interface RefreshAuthTokenResponse {
-  accessToken: string;
+  token: string;
+  refreshToken: string;
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;

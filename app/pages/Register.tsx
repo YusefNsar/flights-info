@@ -8,26 +8,30 @@ import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useRegister } from "../hooks/auth/useRegister";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
-  persistent: HTMLInputElement;
+  name: HTMLInputElement;
 }
 interface SignUpFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
 export const Register = () => {
+  const [registerUser, isLoading] = useRegister();
+
   const handleSubmit = (event: React.FormEvent<SignUpFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
     const data = {
       email: formElements.email.value,
       password: formElements.password.value,
-      persistent: formElements.persistent.checked,
+      name: formElements.name.value,
     };
-    alert(JSON.stringify(data, null, 2));
+
+    registerUser([data.name, data.email, data.password]);
   };
 
   return (
@@ -70,7 +74,7 @@ export const Register = () => {
           </FormControl>
 
           <Stack sx={{ gap: 4, mt: 4 }}>
-            <Button type="submit" fullWidth>
+            <Button type="submit" fullWidth loading={isLoading}>
               Sign up
             </Button>
           </Stack>

@@ -18,7 +18,7 @@
     "test": "vitest",
     "build": "yarn workspaces foreach -tiA run build",
     "deploy": "yarn workspace edge deploy",
-    "server": "flights-server --verbose --noreadme"
+    "server": "flights-server --verbose --noreadme --auth"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
