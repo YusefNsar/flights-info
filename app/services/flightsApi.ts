@@ -91,7 +91,7 @@ export const getFlights = async (
 };
 
 export const createFlight = async (
-  flightData: Partial<Flight>,
+  flightData: Pick<Flight, "code" | "capacity" | "departureDate">,
 ): Promise<CreateFlightResponse> => {
   try {
     const response: AxiosResponse<CreateFlightResponse> = await api.post(
@@ -280,7 +280,7 @@ interface FlightPhoto {
 }
 
 interface FlightAvailabilityResponse {
-  available: boolean;
+  status: "unavailable" | "available";
 }
 
 // export default {

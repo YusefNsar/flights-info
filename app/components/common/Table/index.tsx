@@ -14,12 +14,13 @@ import { TableFooter } from "./TableFooter";
 export interface TableProps<RowData = unknown> extends TableData<RowData> {
   tableTitle: string;
   loading: boolean;
+  addRow: React.ReactNode;
 }
 
 export const Table = <RowData,>(
   props: TableProps<RowData>,
 ): React.ReactElement => {
-  const { columns, tableTitle } = props;
+  const { columns, tableTitle, addRow } = props;
 
   const table = useTable({
     ...props,
@@ -30,12 +31,11 @@ export const Table = <RowData,>(
     <Sheet
       variant="outlined"
       sx={{
-        // width: "100%",
         boxShadow: "sm",
         borderRadius: "sm",
       }}
     >
-      <TableToolbar table={table} tableTitle={tableTitle} />
+      <TableToolbar table={table} tableTitle={tableTitle} addRow={addRow} />
       <Box sx={{ height: "50vh", overflow: "auto" }}>
         <JoyTable
           aria-labelledby="tableTitle"

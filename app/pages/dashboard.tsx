@@ -2,7 +2,7 @@
 /* SPDX-License-Identifier: MIT */
 
 import { Box, Card, CardContent, Container, Typography } from "@mui/joy";
-import { FlightsTable } from "../components/FlightsTable";
+import { FlightsTable } from "../components/flights/FlightsTable";
 import { usePageEffect } from "../core/page";
 
 export const Component = function Dashboard(): JSX.Element {

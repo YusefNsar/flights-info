@@ -1,5 +1,4 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import Box from "@mui/joy/Box";
 import IconButton from "@mui/joy/IconButton";
 import Tooltip from "@mui/joy/Tooltip";
@@ -9,10 +8,11 @@ import { Table } from "@tanstack/react-table";
 export interface TableToolbarProps<RowData> {
   tableTitle: string;
   table: Table<RowData>;
+  addRow: React.ReactNode;
 }
 
 export function TableToolbar<RowData>(props: TableToolbarProps<RowData>) {
-  const { table, tableTitle } = props;
+  const { table, tableTitle, addRow } = props;
 
   const selected = table.getSelectedRowModel().rows;
   const numSelected = selected.length;
@@ -54,11 +54,7 @@ export function TableToolbar<RowData>(props: TableToolbarProps<RowData>) {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton size="sm" variant="outlined" color="neutral">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+        addRow
       )}
     </Box>
   );

@@ -1,13 +1,9 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getFlights } from "../../services/flightsApi";
 
 export const useFetchFlights = () => {
   const params = useFetchFlightsParams();
-
-  // const [page, setPage] = useState<number>(defaults.page || 1);
-  // const [size, setSize] = useState<number>(defaults.size || 10);
-  // const [code, setCode] = useState<string>(defaults.code || "");
 
   const query = useQuery({
     queryKey: ["flights", params.page, params.size, params.code] as [
@@ -38,6 +34,7 @@ export const useFetchFlightsParams = () => {
     size: "10",
     code: "",
   });
+  const navigate = useNavigate();
 
   const page = parseInt(searchParams.get("page") || "1");
   const size = parseInt(searchParams.get("size") || "10");
@@ -66,33 +63,9 @@ export const useFetchFlightsParams = () => {
     );
   };
 
-  // const setPage = (page: number) => {
-  //   setSearchParams(
-  //     (prev) => {
-  //       prev.set("page", page.toString());
-  //       return prev;
-  //     },
-  //     { replace: true },
-  //   );
-  // };
-  // const setSize = (size: number) => {
-  //   setSearchParams(
-  //     (prev) => {
-  //       prev.set("size", size.toString());
-  //       return prev;
-  //     },
-  //     { replace: true },
-  //   );
-  // };
-  // const setCode = (code: string) => {
-  //   setSearchParams(
-  //     (prev) => {
-  //       prev.set("code", code);
-  //       return prev;
-  //     },
-  //     { replace: true },
-  //   );
-  // };
+  if (page < 0 || !sizesOptions.includes(size)) {
+    navigate("/", { replace: true });
+  }
 
   return {
     page,
@@ -101,3 +74,5 @@ export const useFetchFlightsParams = () => {
     update,
   };
 };
+
+export const sizesOptions = [5, 10, 25];

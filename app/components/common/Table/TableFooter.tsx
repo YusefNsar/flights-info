@@ -8,6 +8,7 @@ import Option from "@mui/joy/Option";
 import Select from "@mui/joy/Select";
 import Typography from "@mui/joy/Typography";
 import { Table } from "@tanstack/react-table";
+import { sizesOptions } from "../../../hooks/flights/useFetchFlights";
 
 export interface TableFooterProps<RowData> {
   table: Table<RowData>;
@@ -39,7 +40,7 @@ export function TableFooter<RowData>(props: TableFooterProps<RowData>) {
             <FormControl orientation="horizontal" size="sm">
               <FormLabel>Rows per page:</FormLabel>
               <Select onChange={handleChangeRowsPerPage} value={rowsPerPage}>
-                {rowsPerPageOptions.map((s) => (
+                {sizesOptions.map((s) => (
                   <Option key={s} value={s}>
                     {s}
                   </Option>
@@ -81,8 +82,6 @@ export function TableFooter<RowData>(props: TableFooterProps<RowData>) {
     </tfoot>
   );
 }
-
-const rowsPerPageOptions = [5, 10, 25];
 
 export function labelDisplayedRows({
   page,
