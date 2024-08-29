@@ -1,19 +1,24 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getFlights } from "../../services/flightsApi";
+import { useDebounce } from "../common/useDebounce";
 
 export const useFetchFlights = () => {
   const params = useFetchFlightsParams();
 
+  const debouncedParams = useDebounce(params, 500);
+
   const query = useQuery({
-    queryKey: ["flights", params.page, params.size, params.code] as [
-      string,
-      number,
-      number,
-      string,
-    ],
+    queryKey: [
+      "flights",
+      debouncedParams.page,
+      debouncedParams.size,
+      debouncedParams.code,
+    ] as [string, number, number, string],
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     queryFn: ({ queryKey: [_, ...rest] }) => getFlights(...rest),
+    retry: false,
+
     placeholderData: keepPreviousData,
   });
 
@@ -53,8 +58,8 @@ export const useFetchFlightsParams = () => {
         if (newParams.size) {
           prev.set("size", newParams.size.toString());
         }
-        if (newParams.code) {
-          prev.set("code", newParams.code);
+        if ("code" in newParams) {
+          prev.set("code", newParams.code || "");
         }
 
         return prev;

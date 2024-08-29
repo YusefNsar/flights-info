@@ -3,7 +3,7 @@ import Sheet from "@mui/joy/Sheet";
 import JoyTable from "@mui/joy/Table";
 import * as React from "react";
 import { TableHead } from "./TableHead";
-import { TableToolbar } from "./TableToolbar";
+import { TableToolbar, TableToolbarProps } from "./TableToolbar";
 
 import { Box } from "@mui/joy";
 import { ColumnDef } from "@tanstack/react-table";
@@ -12,17 +12,14 @@ import { TableBody } from "./TableBody";
 import { TableFooter } from "./TableFooter";
 
 export interface TableProps<RowData = unknown> extends TableData<RowData> {
-  tableTitle: string;
   loading: boolean;
-  addRow: React.ReactNode;
-  editRow: (selectedRow: RowData) => React.ReactNode;
-  deleteRows: (selectedRows: RowData[]) => React.ReactNode;
+  toolbarProps: Omit<TableToolbarProps<RowData>, "table">;
 }
 
 export const Table = <RowData,>(
   props: TableProps<RowData>,
 ): React.ReactElement => {
-  const { columns, tableTitle, addRow, editRow, deleteRows } = props;
+  const { columns, toolbarProps } = props;
 
   const table = useTable({
     ...props,
@@ -37,13 +34,7 @@ export const Table = <RowData,>(
         borderRadius: "sm",
       }}
     >
-      <TableToolbar
-        table={table}
-        tableTitle={tableTitle}
-        addRow={addRow}
-        editRow={editRow}
-        deleteRows={deleteRows}
-      />
+      <TableToolbar table={table} {...toolbarProps} />
       <Box sx={{ height: "50vh", overflow: "auto" }}>
         <JoyTable
           aria-labelledby="tableTitle"

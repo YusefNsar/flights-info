@@ -9,13 +9,13 @@ import { Table } from "../../common/Table";
 import { AddFlightDialog } from "../AddFlightDialog";
 import { EditFlightDialog } from "../EditFlightDialog";
 import { DeleteFlightsDialog } from "../deleteFlightsDialog";
+import { SearchFlightInput } from "./SearchFlightInput";
 
 export const FlightsTable = () => {
   const { flights, totalFlights, ...query } = useFetchFlights();
 
   return (
     <Table<Flight>
-      tableTitle="Flights"
       rows={flights}
       columns={flightsTableCols}
       rowsCount={totalFlights}
@@ -25,9 +25,19 @@ export const FlightsTable = () => {
       }}
       setPagination={getSetPagination(query.params)}
       loading={query.isLoading}
-      addRow={<AddFlightDialog />}
-      editRow={(flight) => <EditFlightDialog flight={flight} />}
-      deleteRows={(flights) => <DeleteFlightsDialog flights={flights} />}
+      toolbarProps={{
+        tableTitle: "Flights",
+        addRow: <AddFlightDialog />,
+        editRow: (flight) => <EditFlightDialog flight={flight} />,
+        deleteRows: (flights) => <DeleteFlightsDialog flights={flights} />,
+        searchRows: (
+          <SearchFlightInput
+            code={query.params.code || ""}
+            onSearch={(code) => query.params.update({ code })}
+            loading={query.isLoading}
+          />
+        ),
+      }}
     />
   );
 };

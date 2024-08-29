@@ -9,10 +9,11 @@ export interface TableToolbarProps<RowData> {
   addRow: React.ReactNode;
   editRow: (selectedRow: RowData) => React.ReactNode;
   deleteRows: (selectedRows: RowData[]) => React.ReactNode;
+  searchRows: React.ReactNode;
 }
 
 export function TableToolbar<RowData>(props: TableToolbarProps<RowData>) {
-  const { table, tableTitle, addRow, editRow, deleteRows } = props;
+  const { table, tableTitle, addRow, editRow, deleteRows, searchRows } = props;
 
   const selected = table.getSelectedRowModel().rows;
   const numSelected = selected.length;
@@ -47,7 +48,9 @@ export function TableToolbar<RowData>(props: TableToolbarProps<RowData>) {
         </Typography>
       )}
 
-      <Stack direction="row" spacing={1}>
+      {searchRows}
+
+      <Stack direction="row-reverse" spacing={1} minWidth={72} sx={{ ml: 2 }}>
         {numSelected === 1 && editRow(selected[0].original)}
 
         {numSelected > 0 ? deleteRows(selected.map((s) => s.original)) : addRow}
