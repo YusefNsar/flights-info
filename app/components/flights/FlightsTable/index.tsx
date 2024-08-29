@@ -8,6 +8,7 @@ import { Flight } from "../../../services/flightsApi";
 import { Table } from "../../common/Table";
 import { AddFlightDialog } from "../AddFlightDialog";
 import { EditFlightDialog } from "../EditFlightDialog";
+import { DeleteFlightsDialog } from "../deleteFlightsDialog";
 
 export const FlightsTable = () => {
   const { flights, totalFlights, ...query } = useFetchFlights();
@@ -26,6 +27,7 @@ export const FlightsTable = () => {
       loading={query.isLoading}
       addRow={<AddFlightDialog />}
       editRow={(flight) => <EditFlightDialog flight={flight} />}
+      deleteRows={(flights) => <DeleteFlightsDialog flights={flights} />}
     />
   );
 };

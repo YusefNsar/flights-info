@@ -16,12 +16,13 @@ export interface TableProps<RowData = unknown> extends TableData<RowData> {
   loading: boolean;
   addRow: React.ReactNode;
   editRow: (selectedRow: RowData) => React.ReactNode;
+  deleteRows: (selectedRows: RowData[]) => React.ReactNode;
 }
 
 export const Table = <RowData,>(
   props: TableProps<RowData>,
 ): React.ReactElement => {
-  const { columns, tableTitle, addRow, editRow } = props;
+  const { columns, tableTitle, addRow, editRow, deleteRows } = props;
 
   const table = useTable({
     ...props,
@@ -41,6 +42,7 @@ export const Table = <RowData,>(
         tableTitle={tableTitle}
         addRow={addRow}
         editRow={editRow}
+        deleteRows={deleteRows}
       />
       <Box sx={{ height: "50vh", overflow: "auto" }}>
         <JoyTable

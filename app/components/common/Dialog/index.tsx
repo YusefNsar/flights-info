@@ -12,16 +12,25 @@ export interface DialogProps {
   title: string;
   subtitle: string;
   trigger: React.ReactNode;
+  easyClose?: boolean;
   children?: React.ReactNode;
 }
 
 export default function Dialog(props: DialogProps) {
-  const { open, onClose, title, subtitle, trigger, children } = props;
+  const {
+    open,
+    onClose,
+    title,
+    subtitle,
+    trigger,
+    children,
+    easyClose = false,
+  } = props;
 
   return (
     <React.Fragment>
       {trigger}
-      <Modal open={open}>
+      <Modal open={open} onClose={easyClose ? onClose : undefined}>
         <ModalDialog>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <Box>
@@ -29,7 +38,7 @@ export default function Dialog(props: DialogProps) {
               <DialogContent>{subtitle}</DialogContent>
             </Box>
 
-            <IconButton onClick={onClose} size="sm">
+            <IconButton onClick={onClose} size="sm" sx={{ ml: 2 }}>
               <CloseIcon />
             </IconButton>
           </Stack>
