@@ -231,6 +231,9 @@ export const getFlightStatus = async (
   }
 };
 
+export const getFlightPhotoURl = (flight: Flight): string =>
+  `${BASE_URL}/flights/${flight.id}/photo?skipcache=${Math.random()}`;
+
 interface LoginResponse {
   accessToken: string;
   refreshToken: string;
@@ -257,7 +260,7 @@ export interface Flight {
   code: string;
   capacity: number;
   departureDate: string;
-  status: string;
+  status: "ready" | "processing" | "none";
   img?: string;
   photo?: string;
 }

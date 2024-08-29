@@ -18,7 +18,7 @@ export const useFetchFlights = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     queryFn: ({ queryKey: [_, ...rest] }) => getFlights(...rest),
     retry: false,
-
+    refetchInterval: 1000 * 60,
     placeholderData: keepPreviousData,
   });
 

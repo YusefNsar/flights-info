@@ -1,5 +1,5 @@
 import { useEditFlights } from "../../../hooks/flights/useEditFlights";
-import { BASE_URL, Flight } from "../../../services/flightsApi";
+import { Flight, getFlightPhotoURl } from "../../../services/flightsApi";
 import { FlightForm } from "../FlightsForm";
 
 export interface EditFlightFormProps {
@@ -11,7 +11,7 @@ export const EditFlightForm = (props: EditFlightFormProps) => {
   const editFlight = useEditFlights(props.flight, props.onSuccess);
 
   if (props.flight.img) {
-    props.flight.photo = `${BASE_URL}/flights/${props.flight.id}/photo`;
+    props.flight.photo = getFlightPhotoURl(props.flight);
   }
 
   return (

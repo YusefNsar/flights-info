@@ -9,6 +9,8 @@ import { Table } from "../../common/Table";
 import { AddFlightDialog } from "../AddFlightDialog";
 import { EditFlightDialog } from "../EditFlightDialog";
 import { DeleteFlightsDialog } from "../deleteFlightsDialog";
+import { FlightPhotoPreview } from "./FlightPhotoPreview";
+import { FlightStatus } from "./FlightStatus";
 import { SearchFlightInput } from "./SearchFlightInput";
 
 export const FlightsTable = () => {
@@ -54,6 +56,14 @@ const flightsTableCols: ColumnDef<Flight, any>[] = [
   }),
   columnHelper.accessor("departureDate", {
     header: "Departure Date",
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+    cell: ({ row }) => <FlightStatus status={row.original.status} />,
+  }),
+  columnHelper.accessor("img", {
+    header: "Photo",
+    cell: ({ row }) => <FlightPhotoPreview flight={row.original} />,
   }),
 ];
 
