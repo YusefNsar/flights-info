@@ -1,20 +1,20 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { getFlights } from "../../services/flightsApi";
 import { useDebounce } from "../common/useDebounce";
 
 export const useFetchFlights = () => {
   const params = useFetchFlightsParams();
 
-  const debouncedParams = useDebounce(params, 500);
+  const debouncedCode = useDebounce(params.code, 500);
 
   const query = useQuery({
-    queryKey: [
-      "flights",
-      debouncedParams.page,
-      debouncedParams.size,
-      debouncedParams.code,
-    ] as [string, number, number, string],
+    queryKey: ["flights", params.page, params.size, debouncedCode] as [
+      string,
+      number,
+      number,
+      string,
+    ],
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     queryFn: ({ queryKey: [_, ...rest] }) => getFlights(...rest),
     retry: false,
@@ -39,7 +39,6 @@ export const useFetchFlightsParams = () => {
     size: "10",
     code: "",
   });
-  const navigate = useNavigate();
 
   const page = parseInt(searchParams.get("page") || "1");
   const size = parseInt(searchParams.get("size") || "10");
@@ -68,8 +67,8 @@ export const useFetchFlightsParams = () => {
     );
   };
 
-  if (page < 0 || !sizesOptions.includes(size)) {
-    navigate("/", { replace: true });
+  if (page <= 0 || !sizesOptions.includes(size)) {
+    throw { status: 400, message: "Bad Request - Invalid page or size" };
   }
 
   return {
