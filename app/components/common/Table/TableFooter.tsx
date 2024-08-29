@@ -22,7 +22,16 @@ export function TableFooter<RowData>(props: TableFooterProps<RowData>) {
   const totalCount = table.getRowCount();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChangeRowsPerPage = (_: any, v: number | null) => {
+    table.resetRowSelection();
     table.setPageSize(Number(v));
+  };
+  const nextPage = () => {
+    table.resetRowSelection();
+    table.nextPage();
+  };
+  const previousPage = () => {
+    table.resetRowSelection();
+    table.previousPage();
   };
 
   return (
@@ -60,7 +69,7 @@ export function TableFooter<RowData>(props: TableFooterProps<RowData>) {
                 color="neutral"
                 variant="outlined"
                 disabled={!table.getCanPreviousPage()}
-                onClick={table.previousPage}
+                onClick={previousPage}
                 sx={{ bgcolor: "background.surface" }}
               >
                 <KeyboardArrowLeftIcon />
@@ -70,7 +79,7 @@ export function TableFooter<RowData>(props: TableFooterProps<RowData>) {
                 color="neutral"
                 variant="outlined"
                 disabled={!table.getCanNextPage()}
-                onClick={table.nextPage}
+                onClick={nextPage}
                 sx={{ bgcolor: "background.surface" }}
               >
                 <KeyboardArrowRightIcon />
