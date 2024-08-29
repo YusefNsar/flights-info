@@ -16,6 +16,7 @@ export type FormFields = {
     validators: FieldValidators<any, any>;
     title: string;
     type: HTMLInputTypeAttribute;
+    disabled?: boolean;
   };
 };
 
@@ -54,6 +55,7 @@ export const Form = (props: FormProps) => {
                 field={field}
                 fieldTitle={fields[fk].title}
                 type={fields[fk].type}
+                disabled={fields[fk].disabled}
               />
             )}
           />

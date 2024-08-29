@@ -9,11 +9,13 @@ export const FieldField = ({
   field,
   fieldTitle = "",
   type = "text",
+  disabled = false,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: FieldApi<any, any, any, any>;
   fieldTitle: string;
   type?: HTMLInputTypeAttribute;
+  disabled?: boolean;
 }) => {
   return (
     <FormControl>
@@ -21,9 +23,14 @@ export const FieldField = ({
       <Input
         {...field}
         defaultValue={field.state.value}
-        onChange={(e) => field.handleChange(e.target.value)}
+        onChange={(e) =>
+          field.handleChange(
+            type === "number" ? +e.target.value : e.target.value,
+          )
+        }
         required
         type={type}
+        disabled={disabled}
       />
       <FieldInfo field={field} />
     </FormControl>

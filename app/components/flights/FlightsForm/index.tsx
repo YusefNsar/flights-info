@@ -1,17 +1,28 @@
-import { checkFlightCodeAvailability } from "../../../services/flightsApi";
+import {
+  Flight,
+  checkFlightCodeAvailability,
+} from "../../../services/flightsApi";
 import { Form, FormFields } from "../../common/Form";
 
 export interface FlightFormProps {
   onSubmit: (form: object) => void;
+  defaultValues?: Partial<Flight>;
 }
 
 export const FlightForm = (props: FlightFormProps) => {
-  return <Form fields={formFields} onSubmit={props.onSubmit} />;
+  return (
+    <Form
+      fields={getFormFields(props.defaultValues)}
+      onSubmit={props.onSubmit}
+    />
+  );
 };
 
-const formFields: FormFields = {
+const getFormFields: (
+  defaultValues: Partial<Flight> | undefined,
+) => FormFields = (defaultValues) => ({
   code: {
-    defaultValue: "",
+    defaultValue: defaultValues?.code || "",
     title: "Code",
     type: "text",
     validators: {
@@ -25,6 +36,8 @@ const formFields: FormFields = {
               : undefined,
       onChangeAsyncDebounceMs: 500,
       onChangeAsync: async ({ value }) => {
+        if (defaultValues) return undefined;
+
         const { status } = await checkFlightCodeAvailability(value);
 
         return status === "unavailable"
@@ -34,9 +47,10 @@ const formFields: FormFields = {
             : undefined;
       },
     },
+    disabled: !!defaultValues,
   },
   capacity: {
-    defaultValue: 50,
+    defaultValue: defaultValues?.capacity || 50,
     title: "Capacity",
     type: "number",
     validators: {
@@ -49,7 +63,7 @@ const formFields: FormFields = {
     },
   },
   departureDate: {
-    defaultValue: "",
+    defaultValue: defaultValues?.departureDate || "",
     title: "Departure Date",
     type: "date",
     validators: {
@@ -61,4 +75,4 @@ const formFields: FormFields = {
             : undefined,
     },
   },
-};
+});

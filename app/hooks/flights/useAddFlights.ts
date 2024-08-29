@@ -1,25 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
-import { createFlight } from "../../../services/flightsApi";
-import { FlightForm } from "../FlightsForm";
+import { createFlight } from "../../services/flightsApi";
 
-export interface AddFlightFormProps {
-  onSuccess: () => void;
-}
-
-export const AddFlightForm = (props: AddFlightFormProps) => {
+export const useAddFlights = (onSuccess: () => void) => {
   const client = useQueryClient();
 
   const createFlightMutation = useMutation({
     mutationFn: (newFlight: Parameters<typeof createFlight>[0]) => {
       return createFlight(newFlight);
     },
-    onSuccess(data) {
-      console.log(data);
+    onSuccess() {
       client.invalidateQueries({
         queryKey: ["flights"],
       });
-      props.onSuccess();
+      onSuccess();
       enqueueSnackbar("Flight created Successfully", { variant: "success" });
     },
     onError(error) {
@@ -30,6 +24,5 @@ export const AddFlightForm = (props: AddFlightFormProps) => {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <FlightForm onSubmit={createFlightMutation.mutate as any} />;
+  return createFlightMutation.mutate;
 };

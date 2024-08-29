@@ -6,7 +6,8 @@ import {
 import { useFetchFlights } from "../../../hooks/flights/useFetchFlights";
 import { Flight } from "../../../services/flightsApi";
 import { Table } from "../../common/Table";
-import { AddFlightDialog } from "../AddFlightDialog.tsx";
+import { AddFlightDialog } from "../AddFlightDialog";
+import { EditFlightDialog } from "../EditFlightDialog";
 
 export const FlightsTable = () => {
   const { flights, totalFlights, ...query } = useFetchFlights();
@@ -24,6 +25,7 @@ export const FlightsTable = () => {
       setPagination={getSetPagination(query.params)}
       loading={query.isLoading}
       addRow={<AddFlightDialog />}
+      editRow={(flight) => <EditFlightDialog flight={flight} />}
     />
   );
 };

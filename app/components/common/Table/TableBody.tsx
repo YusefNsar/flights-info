@@ -9,7 +9,7 @@ export function TableBody<RowData>(props: TableBodyProps<RowData>) {
   const rows = table.getRowModel().rows;
 
   return (
-    <tbody>
+    <tbody style={{ cursor: "pointer" }}>
       {rows.map((row) => {
         const isItemSelected = row.getIsSelected();
 
