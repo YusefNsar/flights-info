@@ -5,9 +5,9 @@ import { ExpandMoreRounded, NotificationsRounded } from "@mui/icons-material";
 import { Box, BoxProps, Button, IconButton } from "@mui/joy";
 import { Fragment, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { useCurrentUser } from "../core/auth";
-import { ColorSchemeButton } from "./button-color-scheme";
-import { UserAvatarButton } from "./button-user-avatar";
+import { UserAvatarButton } from "../../components/button-user-avatar";
+import { ColorSchemeToggle } from "../../components/common/ColorSchemeToggle";
+import { useCurrentUser } from "../../core/auth";
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
   const { sx, ...other } = props;
@@ -47,7 +47,8 @@ function ActionButtons(): JSX.Element {
 
   return (
     <Fragment>
-      <ColorSchemeButton variant="soft" size="sm" />
+      {/* <ColorSchemeButton variant="soft" size="sm" /> */}
+      <ColorSchemeToggle />
 
       <IconButton variant="soft" size="sm">
         <NotificationsRounded />

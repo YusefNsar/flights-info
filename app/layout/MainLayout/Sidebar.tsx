@@ -2,7 +2,7 @@
 /* SPDX-License-Identifier: MIT */
 
 import { Sheet, SheetProps } from "@mui/joy";
-import { Navigation } from "./navigation";
+import { Navigation } from "./Navigation";
 
 const width = 260;
 
