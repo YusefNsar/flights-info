@@ -1,21 +1,9 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
 import react from "@vitejs/plugin-react";
 import { URL, fileURLToPath } from "node:url";
 import { loadEnv } from "vite";
 import { defineProject } from "vitest/config";
 
-const publicEnvVars = [
-  "APP_ENV",
-  "APP_NAME",
-  "APP_ORIGIN",
-  "GOOGLE_CLOUD_PROJECT",
-  "FIREBASE_APP_ID",
-  "FIREBASE_API_KEY",
-  "FIREBASE_AUTH_DOMAIN",
-  "GA_MEASUREMENT_ID",
-];
+const publicEnvVars = ["APP_ENV", "APP_NAME", "APP_ORIGIN"];
 
 /**
  * Vite configuration.
@@ -37,7 +25,6 @@ export default defineProject(async ({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            firebase: ["firebase/analytics", "firebase/app", "firebase/auth"],
             react: ["react", "react-dom", "react-router-dom"],
           },
         },

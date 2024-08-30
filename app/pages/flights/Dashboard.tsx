@@ -1,9 +1,6 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
-import { Box, Card, CardContent, Container, Typography } from "@mui/joy";
-import { FlightsTable } from "../components/flights/FlightsTable";
-import { usePageEffect } from "../core/page";
+import { Box, Container, Typography } from "@mui/joy";
+import { FlightsTable } from "../../components/flights/FlightsTable";
+import { usePageEffect } from "../../hooks/common/usePageEffect";
 
 export const Component = function Dashboard(): JSX.Element {
   usePageEffect({ title: "Dashboard" });
@@ -21,15 +18,13 @@ export const Component = function Dashboard(): JSX.Element {
           gap: 2,
         }}
       >
-        <Card sx={{ gridArea: "1 / 1 / 2 / -1" }}>
-          <CardContent sx={{ minHeight: 300 }}>
-            <Typography level="h3">Card title</Typography>
-            <Typography>Card content</Typography>
-            <FlightsTable />
-          </CardContent>
-        </Card>
+        <FlightsTable sx={{ gridArea: "1 / 1 / 2 / -1", minHeight: 300 }} />
+        {/* <Card> */}
+        {/* <CardContent sx={{ minHeight: 300 }}>
+          </CardContent> */}
+        {/* </Card> */}
 
-        <Card>
+        {/* <Card>
           <CardContent sx={{ minHeight: 150 }}>
             <Typography level="h3">Card title</Typography>
             <Typography>Card content</Typography>
@@ -41,7 +36,7 @@ export const Component = function Dashboard(): JSX.Element {
             <Typography level="h3">Card title</Typography>
             <Typography>Card content</Typography>
           </CardContent>
-        </Card>
+        </Card> */}
       </Box>
     </Container>
   );

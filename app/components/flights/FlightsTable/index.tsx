@@ -1,3 +1,4 @@
+import { SxProps } from "@mui/joy/styles/types";
 import {
   ColumnDef,
   PaginationState,
@@ -13,7 +14,7 @@ import { FlightPhotoPreview } from "./FlightPhotoPreview";
 import { FlightStatus } from "./FlightStatus";
 import { SearchFlightInput } from "./SearchFlightInput";
 
-export const FlightsTable = () => {
+export const FlightsTable = ({ sx }: { sx?: SxProps }) => {
   const { flights, totalFlights, ...query } = useFetchFlights();
 
   return (
@@ -40,6 +41,7 @@ export const FlightsTable = () => {
           />
         ),
       }}
+      sx={sx}
     />
   );
 };

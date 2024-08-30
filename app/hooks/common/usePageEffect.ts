@@ -1,7 +1,3 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
-import { getAnalytics, logEvent } from "firebase/analytics";
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 
@@ -32,17 +28,6 @@ export function usePageEffect(
     location,
     options?.title,
   ]);
-
-  // Send "page view" event to Google Analytics
-  // https://support.google.com/analytics/answer/11403294?hl=en
-  React.useEffect(() => {
-    if (!(options?.trackPageView === false)) {
-      logEvent(getAnalytics(), "page_view", {
-        page_title: options?.title ?? appName,
-        page_path: `${location.pathname}${location.search}`,
-      });
-    }
-  }, [location, options?.title, options?.trackPageView]);
 }
 
 type Options = {

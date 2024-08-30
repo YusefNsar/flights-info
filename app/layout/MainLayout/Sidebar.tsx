@@ -1,6 +1,3 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
 import { Sheet, SheetProps } from "@mui/joy";
 import { Navigation } from "./Navigation";
 

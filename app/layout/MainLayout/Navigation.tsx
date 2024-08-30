@@ -1,11 +1,4 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
-import {
-  AssignmentTurnedInRounded,
-  ChatRounded,
-  Dashboard,
-} from "@mui/icons-material";
+import { Dashboard } from "@mui/icons-material";
 import {
   List,
   ListItem,
@@ -30,12 +23,6 @@ export const Navigation = memo(function Navigation(
       {...other}
     >
       <NavItem path="/dashboard" label="Dashboard" icon={<Dashboard />} />
-      <NavItem
-        path="/tasks"
-        label="Tasks"
-        icon={<AssignmentTurnedInRounded />}
-      />
-      <NavItem path="/messages" label="Messages" icon={<ChatRounded />} />
     </List>
   );
 });

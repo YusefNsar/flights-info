@@ -1,7 +1,3 @@
-/* SPDX-FileCopyrightText: 2014-present Kriasoft */
-/* SPDX-License-Identifier: MIT */
-
-import { ExpandMoreRounded } from "@mui/icons-material";
 import { Box, BoxProps, Button } from "@mui/joy";
 import { Fragment, Suspense } from "react";
 import { Link } from "react-router-dom";
@@ -26,13 +22,6 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
       component="header"
       {...other}
     >
-      <Button
-        color="neutral"
-        variant="plain"
-        endDecorator={<ExpandMoreRounded />}
-        children="Project Name"
-      />
-
       <Box sx={{ flexGrow: 1 }} component="span" />
 
       <Suspense>

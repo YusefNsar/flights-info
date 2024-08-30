@@ -6,6 +6,7 @@ import { TableHead } from "./TableHead";
 import { TableToolbar, TableToolbarProps } from "./TableToolbar";
 
 import { Box } from "@mui/joy";
+import { SxProps } from "@mui/joy/styles/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { TableData, useTable } from "../../../hooks/common/useTable";
 import { TableBody } from "./TableBody";
@@ -14,6 +15,7 @@ import { TableFooter } from "./TableFooter";
 export interface TableProps<RowData = unknown> extends TableData<RowData> {
   loading: boolean;
   toolbarProps: Omit<TableToolbarProps<RowData>, "table">;
+  sx?: SxProps;
 }
 
 export const Table = <RowData,>(
@@ -32,6 +34,7 @@ export const Table = <RowData,>(
       sx={{
         boxShadow: "sm",
         borderRadius: "sm",
+        ...props.sx,
       }}
     >
       <TableToolbar table={table} {...toolbarProps} />

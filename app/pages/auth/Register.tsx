@@ -8,7 +8,7 @@ import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useRegister } from "../hooks/auth/useRegister";
+import { useRegister } from "../../hooks/auth/useRegister";
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
