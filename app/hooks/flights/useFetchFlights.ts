@@ -1,4 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getFlights } from "../../services/flightsApi";
 import { useDebounce } from "../common/useDebounce";
@@ -22,8 +23,15 @@ export const useFetchFlights = () => {
     placeholderData: keepPreviousData,
   });
 
-  const flights = query.data?.resources || [];
+  const defaultFlights = useMemo(() => [], []);
+  const flights = query.data?.resources || defaultFlights;
   const totalFlights = query.data?.total || 0;
+
+  useEffect(() => {
+    if (flights.length === 0 && totalFlights > 0 && params.code) {
+      params.update({ page: 1 });
+    }
+  }, [flights, totalFlights, params]);
 
   return {
     ...query,
