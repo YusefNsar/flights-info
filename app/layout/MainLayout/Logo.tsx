@@ -8,9 +8,10 @@ export function Logo(props: LogoProps): JSX.Element {
   return (
     <Box
       sx={{
+        display: { xs: "none", sm: "flex" },
         py: 1,
         px: 2,
-        display: "flex",
+        // display: "flex",
         alignItems: "center",
         gap: 1,
         ...sx,

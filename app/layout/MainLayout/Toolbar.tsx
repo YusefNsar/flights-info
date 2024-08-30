@@ -1,9 +1,11 @@
-import { Box, BoxProps, Button } from "@mui/joy";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box, BoxProps, Button, IconButton } from "@mui/joy";
 import { Fragment, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { ColorSchemeToggle } from "../../components/common/ColorSchemeToggle";
 import { UserAvatarButton } from "../../components/common/UserAvatarButton";
 import { useCurrentUser } from "../../core/auth";
+import { toggleSidebar } from "./Sidebar";
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
   const { sx, ...other } = props;
@@ -22,6 +24,16 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
       component="header"
       {...other}
     >
+      <IconButton
+        onClick={() => toggleSidebar()}
+        variant="outlined"
+        color="neutral"
+        size="sm"
+        sx={{ display: { sm: "none" } }}
+      >
+        <MenuIcon />
+      </IconButton>
+
       <Box sx={{ flexGrow: 1 }} component="span" />
 
       <Suspense>
