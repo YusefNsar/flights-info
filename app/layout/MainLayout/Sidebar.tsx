@@ -18,7 +18,7 @@ export function Sidebar(props: SidebarProps): JSX.Element {
         transition: "transform 0.4s, width 0.4s",
         pt: "60px",
         top: 0,
-        zIndex: 10000,
+        zIndex: { xs: 10000, sm: "auto" },
         height: { xs: "100dvh" },
         px: 2,
         borderRight: ({ palette }) => `1px solid ${palette.divider}`,

@@ -9631,6 +9631,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-intersection-observer@npm:^9.13.0":
+  version: 9.13.0
+  resolution: "react-intersection-observer@npm:9.13.0"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 10/e91d4dc51bde431032d608a2b98a969d4c7532c6f01509b83681e87ebfd8f1ee412455bfb45b565c3ce77080a8cf0c8aa22da3fd26565753835e82a5b0f15cdb
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -10107,6 +10120,7 @@ __metadata:
     husky: "npm:^9.0.11"
     prettier: "npm:^3.2.5"
     react: "npm:^18.2.0"
+    react-intersection-observer: "npm:^9.13.0"
     relay-config: "npm:^12.0.1"
     typescript: "npm:~5.3.3"
     vite: "npm:~5.1.2"

@@ -1,9 +1,13 @@
 import { Box, Container, Typography } from "@mui/joy";
+import { FlightsInfiniteScroll } from "../../components/flights/FlightsInfiniteScroll";
 import { FlightsTable } from "../../components/flights/FlightsTable";
+import { useBreakpoint } from "../../hooks/common/useBreakpoint";
 import { usePageEffect } from "../../hooks/common/usePageEffect";
 
 export const Component = function Dashboard(): JSX.Element {
   usePageEffect({ title: "Dashboard" });
+
+  const bp = useBreakpoint();
 
   return (
     <Container sx={{ py: 2 }}>
@@ -18,25 +22,11 @@ export const Component = function Dashboard(): JSX.Element {
           gap: 2,
         }}
       >
-        <FlightsTable sx={{ gridArea: "1 / 1 / 2 / -1", minHeight: 300 }} />
-        {/* <Card> */}
-        {/* <CardContent sx={{ minHeight: 300 }}>
-          </CardContent> */}
-        {/* </Card> */}
-
-        {/* <Card>
-          <CardContent sx={{ minHeight: 150 }}>
-            <Typography level="h3">Card title</Typography>
-            <Typography>Card content</Typography>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent sx={{ minHeight: 150 }}>
-            <Typography level="h3">Card title</Typography>
-            <Typography>Card content</Typography>
-          </CardContent>
-        </Card> */}
+        {bp === "xs" ? (
+          <FlightsInfiniteScroll />
+        ) : (
+          <FlightsTable sx={{ gridArea: "1 / 1 / 2 / -1", minHeight: 300 }} />
+        )}
       </Box>
     </Container>
   );
