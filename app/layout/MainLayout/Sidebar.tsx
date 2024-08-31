@@ -5,24 +5,23 @@ import { Navigation } from "./Navigation";
 const width = 260;
 
 export function Sidebar(props: SidebarProps): JSX.Element {
-  const { sx, ...other } = props;
+  const { sx, forceHide, ...other } = props;
 
   return (
     <Sheet
       sx={{
-        position: { xs: "fixed", sm: "sticky" },
+        position: forceHide ? "fixed" : { xs: "fixed", sm: "sticky" },
         transform: {
           xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))",
-          sm: "none",
+          ...(forceHide ? {} : { sm: "none" }),
         },
         transition: "transform 0.4s, width 0.4s",
         pt: "60px",
         top: 0,
-        zIndex: { xs: 10000, sm: "auto" },
+        zIndex: forceHide ? 10000 : { xs: 10000, sm: "auto" },
         height: { xs: "100dvh" },
         px: 2,
         borderRight: ({ palette }) => `1px solid ${palette.divider}`,
-        // overflow: "auto",
         width,
         ...sx,
       }}
@@ -43,7 +42,7 @@ export function Sidebar(props: SidebarProps): JSX.Element {
           transition: "opacity 0.4s",
           transform: {
             xs: `translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * ${width}px))`,
-            lg: "translateX(-100%)",
+            ...(forceHide ? {} : { lg: "translateX(-100%)" }),
           },
         }}
         onClick={() => closeSidebar()}
@@ -56,7 +55,9 @@ export function Sidebar(props: SidebarProps): JSX.Element {
   );
 }
 
-export type SidebarProps = Omit<SheetProps, "children">;
+export type SidebarProps = Omit<SheetProps, "children"> & {
+  forceHide?: boolean;
+};
 
 export function openSidebar() {
   if (typeof window !== "undefined") {

@@ -18,10 +18,10 @@ export const AuthBackground = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8?auto=format&w=1000&dpr=2)",
+          "url(https://plus.unsplash.com/premium_photo-1679830513886-e09cd6dc3137?q=80&w=1527&auto=format&&w=1000&dpr=2)",
         [theme.getColorSchemeSelector("dark")]: {
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)",
+            "url(https://images.unsplash.com/photo-1540341516648-66ed6734721b?auto=format&w=1000&dpr=2)",
         },
       })}
     />

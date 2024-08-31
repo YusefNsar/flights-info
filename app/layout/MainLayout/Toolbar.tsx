@@ -8,7 +8,7 @@ import { useCurrentUser } from "../../core/auth";
 import { toggleSidebar } from "./Sidebar";
 
 export function Toolbar(props: ToolbarProps): JSX.Element {
-  const { sx, ...other } = props;
+  const { sx, forceHide, ...other } = props;
 
   return (
     <Box
@@ -19,6 +19,7 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
         display: "flex",
         gap: 1,
         px: 2,
+        py: 0.5,
         ...sx,
       }}
       component="header"
@@ -29,7 +30,7 @@ export function Toolbar(props: ToolbarProps): JSX.Element {
         variant="outlined"
         color="neutral"
         size="sm"
-        sx={{ display: { sm: "none" } }}
+        sx={{ display: forceHide ? {} : { sm: "none" } }}
       >
         <MenuIcon />
       </IconButton>
@@ -61,4 +62,6 @@ function ActionButtons(): JSX.Element {
   );
 }
 
-type ToolbarProps = Omit<BoxProps<"header">, "children">;
+type ToolbarProps = Omit<BoxProps<"header">, "children"> & {
+  forceHide?: boolean;
+};

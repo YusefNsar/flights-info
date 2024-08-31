@@ -1,10 +1,15 @@
-import { Navigate } from "react-router-dom";
-// import { RootError } from "../components";
 import { AuthLayout } from "../layout/AuthLayout";
+import { HeroLayout } from "../layout/HeroLayout";
 import { MainLayout } from "../layout/MainLayout";
 import { RootError } from "../layout/RootError";
 
 export const routes = [
+  {
+    path: "",
+    element: <HeroLayout />,
+    errorElement: <RootError />,
+    children: [{ index: true, lazy: () => import("../pages/HeroSection") }],
+  },
   {
     path: "",
     element: <AuthLayout />,
@@ -19,7 +24,6 @@ export const routes = [
     element: <MainLayout />,
     errorElement: <RootError />,
     children: [
-      { index: true, element: <Navigate to="/dashboard" replace /> },
       { path: "dashboard", lazy: () => import("../pages/flights/Dashboard") },
     ],
   },

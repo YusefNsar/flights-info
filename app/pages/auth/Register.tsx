@@ -7,7 +7,7 @@ import Link from "@mui/joy/Link";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { useRegister } from "../../hooks/auth/useRegister";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -21,6 +21,7 @@ interface SignUpFormElement extends HTMLFormElement {
 
 export const Register = () => {
   const [registerUser, isLoading] = useRegister();
+  const { state } = useLocation();
 
   const handleSubmit = (event: React.FormEvent<SignUpFormElement>) => {
     event.preventDefault();
@@ -66,7 +67,11 @@ export const Register = () => {
           </FormControl>
           <FormControl required>
             <FormLabel>Email</FormLabel>
-            <Input type="email" name="email" />
+            <Input
+              type="email"
+              name="email"
+              defaultValue={state?.email || ""}
+            />
           </FormControl>
           <FormControl required>
             <FormLabel>Password</FormLabel>
